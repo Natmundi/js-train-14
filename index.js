@@ -429,6 +429,16 @@ function compareDates(date1, date2) {
   // Порівняння дат і отримання результату порівняння: -1, якщо date1 < date2, 0, якщо date1 === date2, 1, якщо date1 > date2.
   // Збереження дат для виведення  в форматі ISO.
   // Повертаємо об'єкт з порівнюваними датами та результатом порівняння.
+  if (
+    typeof date1.getTime !== "function" &&
+    typeof date2.getTime !== "function"
+  ) {
+    return "Помилка: вхідне значення має бути об'єктом Date";
+  }
+  const compar = date1 < date2 ? -1 : date1 === date2 ? 0 : 1;
+  let formatedDate1 = date1.toISOString();
+  let formatedDate2 = date2.toISOString();
+  return { formatedDate1, formatedDate2, compar };
 }
 console.log("Завдання: 12 ==============================");
 
@@ -463,6 +473,19 @@ function getDaysDifference(startDate, endDate) {
   // Перетворення різниці в мілісекундах у дні поділивши мілісекунди на (1000 * 60 * 60 * 24).
   // Збереження дат для виведення в форматі ISO.
   // Повертаємо об'єкт з початковою та кінцевою датами та різницею в днях.
+  if (
+    typeof startDate.getTime !== "function" &&
+    typeof endDate.getTime !== "function"
+  ) {
+    return "Помилка: вхідне значення має бути об'єктом Date";
+  }
+  let millisecStart = startDate.getTime();
+  let milisecEnd = endDate.getTime();
+  const diff = milisecEnd - millisecStart;
+  const day = diff / (1000 * 60 * 60 * 24);
+  let formatedIsoStart = startDate.toISOString();
+  let formatedIsoEnd = endDate.toISOString();
+  return { formatedIsoStart, formatedIsoEnd, day };
 }
 console.log("Завдання: 13 ==============================");
 
